@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import {emptyCart} from "./cartHelpers";
-import Layout from "./Layout";
-import { getProducts,getBraintreeClientToken, processPayment, createOrder } from "./apiCore";
+import {
+    getProducts,
+    getBraintreeClientToken,
+    processPayment,
+    createOrder
+} from "./apiCore";
+import { emptyCart } from "./cartHelpers";
 import Card from "./Card";
 import { isAuthenticated } from "../auth";
 import { Link } from "react-router-dom";
@@ -36,7 +40,7 @@ const Checkout = ({ products }) => {
     }, []);
 
     const handleAddress = event => {
-        setData({...data, address: event.target.value })
+        setData({ ...data, address: event.target.value });
     };
 
     const getTotal = () => {
@@ -55,7 +59,7 @@ const Checkout = ({ products }) => {
         );
     };
 
-    let deliveryAddress =  data.address;
+    let deliveryAddress = data.address;
 
     const buy = () => {
         setData({ loading: true });
@@ -81,29 +85,37 @@ const Checkout = ({ products }) => {
 
                 processPayment(userId, token, paymentData)
                     .then(response => {
-                        // console.log(response);
+                        console.log(response);
+                        // empty cart
                         // create order
+
                         const createOrderData = {
                             products: products,
                             transaction_id: response.transaction.id,
-                            amount:response.transaction.amount,
-                            address:deliveryAddress
-                        }
+                            amount: response.transaction.amount,
+                            address: deliveryAddress
+                        };
+
                         createOrder(userId, token, createOrderData)
                             .then(response => {
-                            // empty cart
-                            emptyCart(()=>{
-                            console.log("Payment Success and empty cart");
-                            setData({ loading: false, success: true });
-                            });   
-                        }).catch(error=>{
-                            console.log(error);
-                            setData({loading:false})
-                        });
+                                emptyCart(() => {
+                                    console.log(
+                                        "payment success and empty cart"
+                                    );
+                                    setData({
+                                        loading: false,
+                                        success: true
+                                    });
+                                });
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                setData({ loading: false });
+                            });
                     })
                     .catch(error => {
-                        console.log(error)
-                        setData({loading:false})
+                        console.log(error);
+                        setData({ loading: false });
                     });
             })
             .catch(error => {
@@ -117,21 +129,25 @@ const Checkout = ({ products }) => {
             {data.clientToken !== null && products.length > 0 ? (
                 <div>
                     <div className="gorm-group mb-3">
-                        <label className="text-muted">Delivery Address:</label>
-                        <textarea 
+                        <label className="text-muted">Delivery address:</label>
+                        <textarea
                             onChange={handleAddress}
                             className="form-control"
                             value={data.address}
-                            placeholder="Type your delivery address here... "
+                            placeholder="Type your delivery address here..."
                         />
                     </div>
+
                     <DropIn
                         options={{
-                            authorization: data.clientToken                        }
-                        }
+                            authorization: data.clientToken,
+                            paypal: {
+                                flow: "vault"
+                            }
+                        }}
                         onInstance={instance => (data.instance = instance)}
                     />
-                    <button onClick={buy} className="btn btn-success btn-block shadow p-3 mb-5 rounded">
+                    <button onClick={buy} className="btn btn-success btn-block">
                         Pay
                     </button>
                 </div>
@@ -157,11 +173,12 @@ const Checkout = ({ products }) => {
         </div>
     );
 
-    const showLoading = (loading) => loading && <h2>Loading...</h2>
+    const showLoading = loading =>
+        loading && <h2 className="text-danger">Loading...</h2>;
 
     return (
         <div>
-            <h2>Total: ₹{getTotal()}</h2>
+            <h2>Total: ${getTotal()}</h2>
             {showLoading(data.loading)}
             {showSuccess(data.success)}
             {showError(data.error)}

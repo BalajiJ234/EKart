@@ -3,9 +3,9 @@ import { Link, Redirect } from 'react-router-dom';
 import ShowImage from './ShowImage';
 import moment from 'moment';
 import { addItem, updateItem, removeItem } from './cartHelpers';
- 
+
 import "../styles.css";
- 
+
 const Card = ({
   product,
   showViewProductButton = true,
@@ -96,8 +96,8 @@ const Card = ({
     );
   };
   return (
-    <div className="card ">
-      <div className="card-header card-header-1 ">{product.name}</div>
+    <div className="card">
+      <div className="card-header name">{product.name}</div>
       <div className="card-body">
         {shouldRedirect(redirect)}
         <ShowImage item={product} url="product" />

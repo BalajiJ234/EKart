@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCart } from './cartHelpers';
 import Card from './Card';
 import Checkout from './Checkout';
- 
+
 const Cart = () => {
   const [items, setItems] = useState([]);
   // const [cartSize, setCartSize] = useState([]);

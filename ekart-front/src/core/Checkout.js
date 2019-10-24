@@ -147,7 +147,7 @@ const Checkout = ({ products }) => {
                         }}
                         onInstance={instance => (data.instance = instance)}
                     />
-                    <button onClick={buy} className="btn btn-success btn-block">
+                    <button onClick={buy} className="btn btn-success btn-block shadow">
                         Pay
                     </button>
                 </div>

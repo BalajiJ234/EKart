@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { getCart } from './cartHelpers';
 import Card from './Card';
 import Checkout from './Checkout';
- 
+
 const Cart = () => {
   const [items, setItems] = useState([]);
   // const [cartSize, setCartSize] = useState([]);
@@ -44,7 +44,9 @@ const Cart = () => {
   );
  
   return (
-    <Layout title="Shopping Cart" description="Checkout now!" className="container-fluid">
+    <Layout title="Shopping Cart"
+     description="Manage Your Cart items. Add or Remove Checkout Items or Continue Shopping!"
+     className="container-fluid">
       <div className="row">
         <div className="col-6">{items.length > 0 ? showItems(items) : noItemsMessage()}</div>
         <div className="col-6">

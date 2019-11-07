@@ -68,8 +68,8 @@ const Signup = () => {
                     value={password}
                 />
             </div>
-            <button onClick={clickSubmit} className="btn btn-primary">
-                Submit
+            <button onClick={clickSubmit} className="btn btn-primary ">
+                Sign Up
             </button>
         </form>
     );

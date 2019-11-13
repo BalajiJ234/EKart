@@ -45,6 +45,7 @@ const Signup = () => {
                     onChange={handleChange("name")}
                     type="text"
                     className="form-control"
+                    placeholder="Enter your full name"
                     value={name}
                 />
             </div>
@@ -55,6 +56,7 @@ const Signup = () => {
                     onChange={handleChange("email")}
                     type="email"
                     className="form-control"
+                    placeholder="Enter your email-id"
                     value={email}
                 />
             </div>
@@ -65,6 +67,7 @@ const Signup = () => {
                     onChange={handleChange("password")}
                     type="password"
                     className="form-control"
+                    placeholder="Enter your password"
                     value={password}
                 />
             </div>
@@ -95,7 +98,7 @@ const Signup = () => {
     return (
         <Layout
             title="Signup"
-            description="Signup to Node React E-commerce App"
+            description="Signup to Online Book Store Application"
             className="container col-md-8 offset-md-2"
         >
             {showSuccess()}

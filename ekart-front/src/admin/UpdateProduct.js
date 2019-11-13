@@ -219,14 +219,24 @@ const UpdateProduct = ({ match }) => {
                 <h2>Loading...</h2>
             </div>
         );
-        const redirectUser = () => {
+
+    const goBack = () => (
+        <div className="mt-5">
+            <Link to="/admin/dashboard" className="text-warning">
+                Back to Dashboard
+            </Link>
+        </div>
+    );
+
+    
+    const redirectUser = () => {
         if (redirectToProfile) {
             if (!error) {
                 return <Redirect to="/admin/dashboard" />;
             }
-        }
+    }
     };
-
+    
     return (
         <Layout
             title="Update product"
@@ -239,6 +249,7 @@ const UpdateProduct = ({ match }) => {
                     {showError()}
                     {newPostForm()}
                     {redirectUser()}
+                    {goBack()}
                 </div>
             </div>
         </Layout>

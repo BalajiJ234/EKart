@@ -32,8 +32,16 @@ const ManageProducts = () => {
     useEffect(() => {
         loadProducts();
     },[])
-
-     return (
+  
+    const goBack = () => (
+        <div className="mt-5">
+            <Link to="/admin/dashboard" className="text-warning">
+                Back to Dashboard
+            </Link>
+        </div>
+    );
+  
+    return (
         <Layout
             title="Manage Products"
             description="Perform CRUD on products"
@@ -57,8 +65,9 @@ const ManageProducts = () => {
                             </li>
                         ))}
                     </ul>
-                </div>
             </div>
+            {goBack()}
+        </div>
            
         </Layout>
     );

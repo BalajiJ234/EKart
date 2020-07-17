@@ -1,4 +1,3 @@
-My_App 
 <p><b>Online Book Store</b></p>
 
 <p>It is my <b>MERN Stack Development.</b> It is web Application <br> It is still in development. </p>
